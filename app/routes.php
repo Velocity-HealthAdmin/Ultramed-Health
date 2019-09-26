@@ -1,15 +1,16 @@
 <?php
+//Hpme Route
+$app->get('/', App\Action\HomeAction::class)
+    ->setName('homepage');
 //System
 include_once dirname(__FILE__). '/../app/src/system/System.php';
 include_once dirname(__FILE__). '/../app/src/system/Admin.php';
 include_once dirname(__FILE__). '/../app/src/system/MembershipNumber.php';
+
+//API  Routes
 $op = new System();
 $admin = new Admin();
 $memb = new MembershipNumber();
-
-// Routes
-$app->get('/', App\Action\HomeAction::class)
-    ->setName('homepage');
 
 $app->group('/api/v1/ussd/subscriptions', function ($group) use ($op, $app) {
     $group->get('/packages', function($request,  $response)use($op) {
@@ -206,7 +207,6 @@ $app->group('/api/v1/ussd/member', function ($group)use($op, $memb){
 
     });
 });
-
 
 $app->group('/api/v1/dashboard/admin', function ($group)use($admin){
 
