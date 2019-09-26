@@ -2,6 +2,8 @@
 Ultra-Med Health Care Medical Aid Society USSD Member Database and access API for USSD system.
 Database is MySQL, hosted on the company website
 
+API documentation hosted on https://documenter.getpostman.com/view/6037556/SVmpYMxc
+
 ## Create your project:
 
     $ composer create-project --no-interaction --stability=dev akrabat/slim3-skeleton my-app
