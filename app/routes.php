@@ -181,7 +181,7 @@ $app->group('/api/v1/ussd/member', function ($group)use($op, $memb){
             ->withStatus($subscribe['statusCode']);
     });
 
-    //change password
+    //change pin
     $group->patch('/settings/pin/change', function($request, $response)use($op){
         $params = $request->getParsedBody();
 
@@ -291,7 +291,7 @@ $app->group('/api/v1/dashboard/admin', function ($group)use($admin){
             ->withStatus($register['statusCode']);
     });
 
-    $group->post('/account/edit', function($request, $response)use($admin){
+    $group->patch('/account/edit', function($request, $response)use($admin){
         $params = $request->getParsedBody();
 
         $name = $admin->validateParameter('First Name', $params['name'], STRING);
@@ -316,6 +316,15 @@ $app->group('/api/v1/dashboard/admin', function ($group)use($admin){
         return $response
             ->withJson($save)
             ->withStatus($save['statusCode']);
+    });
+
+    $group->get('/accounts', function($request, $response)use($admin){
+
+        $admins = $admin->adminAll();
+
+        return $response
+            ->withJson($admins)
+            ->withStatus($admins['statusCode']);
     });
 
 });

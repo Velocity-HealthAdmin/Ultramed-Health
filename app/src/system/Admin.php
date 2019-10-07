@@ -96,4 +96,23 @@ class Admin extends System
     public function updatePassword(){
 
     }
+
+    public function adminAll(){
+        try{
+            $sql = "SELECT * FROM `admin`";
+            $qry = mysqli_query($this->con, $sql);
+            if (mysqli_num_rows($qry) > 0){
+                $row = mysqli_fetch_assoc($qry);
+                $users = json_encode($row);
+                $data = array('success' => true, 'statusCode' => SUCCESS_RESPONSE, 'message'=> 'Fetched Users','users'=>$users);
+                return $data;
+            }else{
+                $data = array('success' => false, 'statusCode' => NOT_FOUND, 'error'=> array('type' => "FETCH_DATA_ERROR", 'message' => 'Users not found'));
+                return $data;
+            }
+        }catch (\Exception $e){
+            $data = array('success' => false, 'statusCode' => INTERNAL_SERVER_ERROR, 'error'=> array('type' => "SERVER_ERROR", 'message' => $e->getMessage()));
+            return $data;
+        }
+    }
 }
