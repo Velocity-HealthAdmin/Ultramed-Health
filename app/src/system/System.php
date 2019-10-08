@@ -1194,9 +1194,12 @@ class System
     }
 
     public function invoice(){
+
         $msql = "SELECT * FROM `members`";
         $mqry = mysqli_query($this->con, $msql);
+
         while($row = mysqli_fetch_assoc($mqry)){
+
             $this->setId($row['id']);
             $memberTotal  = $this->memberInvoice($this->getId());
             $dependantsTotal = $this->dependantInvoice($this->getId());

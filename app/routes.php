@@ -327,4 +327,12 @@ $app->group('/api/v1/dashboard/admin', function ($group)use($admin){
             ->withStatus($admins['statusCode']);
     });
 
+    $group->get('/members/all', function($request, $response)use($admin){
+
+        $admins = $admin->membersAll();
+        return $response
+            ->withJson($admins)
+            ->withStatus($admins['statusCode']);
+    });
+
 });

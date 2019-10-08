@@ -99,12 +99,22 @@ class Admin extends System
 
     public function adminAll(){
         try{
-            $sql = "SELECT * FROM `admin`";
+            $sql = "SELECT * FROM `admin` WHERE 1";
             $qry = mysqli_query($this->con, $sql);
             if (mysqli_num_rows($qry) > 0){
-                $row = mysqli_fetch_assoc($qry);
-                $users = json_encode($row);
-                $data = array('success' => true, 'statusCode' => SUCCESS_RESPONSE, 'message'=> 'Fetched Users','users'=>$users);
+                $results = array();
+                while($row = mysqli_fetch_assoc($qry)){
+                    $arr = array(
+                        'name' => $row['name'],
+                        'surname' => $row['surname'],
+                        'email' => $row['email'],
+                        'profile' => $row['profile'],
+                        'category' => $row['category'],
+                        'permission' => $row['permisions']
+                    );
+                    array_push($results ,$arr);
+                }
+                $data = array('success' => true, 'statusCode' => SUCCESS_RESPONSE, 'message'=> 'Fetched Users','users'=>$results, 'results' => mysqli_num_rows($qry));
                 return $data;
             }else{
                 $data = array('success' => false, 'statusCode' => NOT_FOUND, 'error'=> array('type' => "FETCH_DATA_ERROR", 'message' => 'Users not found'));
@@ -115,4 +125,110 @@ class Admin extends System
             return $data;
         }
     }
+
+    public function membersAll(){
+        try{
+
+            $sql = "SELECT * FROM `members`";
+            $qry = mysqli_query($this->con, $sql);
+
+            if (mysqli_num_rows($qry) > 0){
+
+                $details = array();
+                while ($row = mysqli_fetch_assoc($qry)){
+                    $id = $row['id'];
+                    $ssql = "SELECT  * FROM `dependant` WHERE `member_id` = '$id'";
+                    $qqry = mysqli_query($this->con, $ssql);
+
+                    $dependant = array();
+                    while($rows = mysqli_fetch_assoc($qqry)){
+                        $dep = array(
+                            'name' => $rows['name'],
+                            'surname' => $rows['surname'],
+                            'membership-number' => $rows['membership_no'],
+                            'national-ID' => $rows['national_ID'],
+                            'D.O.B' => $rows['dob'],
+                            'gender' => $rows['gender']
+                        );
+
+                        array_push($dependant, $dep);
+                    }
+
+                    $member = array(
+                        'id' => $id,
+                        'name' => $row['name'],
+                        'surname' => $row['surname'],
+                        'national-ID' => $row['id_number'],
+                        'membership-number' => $row['membership_no'],
+                        'D.O.B' => $row['dob'],
+                        'gender' => $row['gender'],
+                        'address' => $row['address'],
+                        'town' => $row['town'],
+                        'registered' => $this->registrationDate($id),
+                        'subscription' => $this->subscription($id),
+                        'dependants' => $dependant
+                    );
+
+                    array_push($details, $member);
+
+                }
+                $data = array(
+                    'success' => true,
+                    'statusCode' => SUCCESS_RESPONSE,
+                    'member' => $details
+                );
+                return $data;
+            }else{
+                $data =  array(
+                    'success' => false,
+                    'statusCode' => SUCCESS_RESPONSE,
+                    'error' => array('type' => 'DATA_ERROR', 'message' => 'No data found')
+                );
+                return $data;
+            }
+        }catch (\Exception $exception){
+
+            return array(
+                'success' => false,
+                'statusCode' => INTERNAL_SERVER_ERROR,
+                'error' => array('type' => 'PROCESS_SERVER_ERROR', 'message' => $exception->getMessage())
+            );
+
+        }
+    }
+
+    public function subscription($member){
+
+        $sql = "SELECT * FROM `subscriptions` WHERE `member_id` = '$member' AND now() BETWEEN `start` AND `end`";
+        $qry = mysqli_query($this->con, $sql);
+        if (mysqli_num_rows($qry) == 0){
+            $ssql ="SELECT * FROM `subscriptions` WHERE `member_id` = '$member' ORDER BY `end` DESC ";
+            $sqry = mysqli_query($this->con, $ssql);
+            $rs = mysqli_fetch_assoc($sqry);
+            return array(
+                'status' => false,
+                'date' => $rs['end']
+            );
+        }else{
+            $rs = mysqli_fetch_assoc($qry);
+            $bill = $rs['bill_id'];
+            $bsql = "SELECT `paid_on` FROM `payment` WHERE `id` = '$bill' ";
+            $bqry = mysqli_query($this->con, $bsql);
+            $drs = mysqli_fetch_assoc($bqry);
+
+            return array(
+                'status' => true,
+                'date' => $drs['paid_on']
+            );
+        }
+    }
+
+    public function registrationDate($id){
+        $sql = "SELECT `created` FROM `members` WHERE  `id` = '$id'";
+        $qry = mysqli_query($this->con, $sql);
+        $rs = mysqli_fetch_assoc($qry);
+        return $rs['created'];
+    }
+
+
 }
