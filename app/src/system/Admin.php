@@ -141,6 +141,7 @@ class Admin extends System
                     $psql = "SELECT `package` FROM `member_details` WHERE `member_id` = '$id'";
                     $pqry = mysqli_query($this->con, $psql);
                     $prs = mysqli_fetch_assoc($pqry);
+
                     $ssql = "SELECT  * FROM `dependant` WHERE `member_id` = '$id'";
                     $qqry = mysqli_query($this->con, $ssql);
 
@@ -168,6 +169,7 @@ class Admin extends System
                         'D.O.B' => $row['dob'],
                         'gender' => $row['gender'],
                         'address' => $row['address'],
+                        'profile' => $this->getProfile($id),
                         'town' => $row['town'],
                         'package' => $this->packageName($prs['package']),
                         'registered' => $this->registrationDate($id),
@@ -237,40 +239,16 @@ class Admin extends System
     }
 
     public function packageName($id){
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => "http://ussd.ultramedhealth.com/api/v1/ussd/subscriptions/packages",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_POSTFIELDS => "",
-            CURLOPT_HTTPHEADER => array(
-                "content-type: application/json",
-            ),
-        ));
-
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-        $data = json_decode($response, true);
-
-        if ($err) {
-
-        }
-        else {
-            if ($data['success'] == true) {
-                foreach ($data['packages'] as $key) {
-
-                    if ($key['id'] == $id) {
-                        return $key['name'];
-                    }else{
-                        return null;
-                    }
-                }
-            }
+        $sql = "SELECT * FROM `packages` WHERE `id` = '$id'";
+        $qry = mysqli_query($this->con, $sql);
+        $rw = mysqli_fetch_assoc($qry);
+        if (mysqli_num_rows($qry) == 1) {
+            return $rw['name'];
+        }else{
+            return null;
         }
     }
+
+    public function getProfile($id){}
 
 }
