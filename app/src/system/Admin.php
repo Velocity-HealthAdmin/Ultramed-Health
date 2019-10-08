@@ -137,12 +137,17 @@ class Admin extends System
                 $details = array();
                 while ($row = mysqli_fetch_assoc($qry)){
                     $id = $row['id'];
+
+                    $psql = "SELECT `package` FROM `member_details` WHERE `member_id` = '$id'";
+                    $pqry = mysqli_query($this->con, $psql);
+                    $prs = mysqli_fetch_assoc($pqry);
                     $ssql = "SELECT  * FROM `dependant` WHERE `member_id` = '$id'";
                     $qqry = mysqli_query($this->con, $ssql);
 
                     $dependant = array();
                     while($rows = mysqli_fetch_assoc($qqry)){
                         $dep = array(
+                            'registered' => $rows['created'],
                             'name' => $rows['name'],
                             'surname' => $rows['surname'],
                             'membership-number' => $rows['membership_no'],
@@ -164,6 +169,7 @@ class Admin extends System
                         'gender' => $row['gender'],
                         'address' => $row['address'],
                         'town' => $row['town'],
+                        'package' => $this->packageName($prs['package']),
                         'registered' => $this->registrationDate($id),
                         'subscription' => $this->subscription($id),
                         'dependants' => $dependant
@@ -230,5 +236,41 @@ class Admin extends System
         return $rs['created'];
     }
 
+    public function packageName($id){
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "http://ussd.ultramedhealth.com/api/v1/ussd/subscriptions/packages",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_POSTFIELDS => "",
+            CURLOPT_HTTPHEADER => array(
+                "content-type: application/json",
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        $data = json_decode($response, true);
+
+        if ($err) {
+
+        }
+        else {
+            if ($data['success'] == true) {
+                foreach ($data['packages'] as $key) {
+
+                    if ($key['id'] == $id) {
+                        return $key['name'];
+                    }else{
+                        return null;
+                    }
+                }
+            }
+        }
+    }
 
 }
