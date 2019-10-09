@@ -15,7 +15,7 @@ class Database
 
     public function PDO() {
         try {
-            $this->pdo = new PDO('mysql:host=' .DB_HOST .';dbname=' . DB_NAME, DB_USERNAME, DB_PASSWORD);
+            $this->pdo = new PDO('mysql:host=' .DB_HOST .';dbname=' . DB_LNAME, DB_USERL, DB_PWD);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $this->pdo;
         } catch (\Exception $e) {
@@ -29,7 +29,7 @@ class Database
     public function mysqli()
     {
         try{
-            $this->con = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
+            $this->con = new mysqli(DB_HOST, DB_USERL, DB_PWD, DB_LNAME);
             return $this->con;
         }catch(\Exception $e){
             header("content-type: application/json");
