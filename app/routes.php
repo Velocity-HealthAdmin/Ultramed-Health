@@ -337,6 +337,12 @@ $app->group('/api/v1/dashboard/admin', function ($group)use($admin){
             ->withStatus($admins['statusCode']);
     });
 
+    $group->patch('/member/update/{action}/{member}', function($request, $response)use($admin){
+        $act = $request->getAttribute('action');
+        $mID = $request->getAttribute('member');
+
+    });
+
 });
 
 // api authentication get token login

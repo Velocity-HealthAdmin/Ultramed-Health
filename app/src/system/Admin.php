@@ -132,14 +132,6 @@ class Admin extends System
 
     }
 
-    public function edit(){
-
-    }
-
-    public function updatePassword(){
-
-    }
-
     public function adminAll(){
         try{
             $sql = "SELECT * FROM `admin` WHERE 1";
@@ -169,9 +161,6 @@ class Admin extends System
         }
     }
 
-    public function apiUserCreate(){
-
-    }
     public function membersAll(){
         try{
 
@@ -295,6 +284,39 @@ class Admin extends System
         }
     }
 
-    public function getProfile($id){}
+    public function getProfile($id){
 
+    }
+
+    public function memberSuspend($id){
+
+    }
+
+    public function removeDependant($id){
+
+    }
+
+    public function removeMember($id){
+
+    }
+
+    public function updateMember($id){
+
+    }
+
+    public function updateSubscription($id){
+
+    }
+
+    public function edit(){
+
+    }
+
+    public function updatePassword(){
+
+    }
+
+    public function apiUserCreate(){
+
+    }
 }
