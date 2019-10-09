@@ -313,7 +313,7 @@ $app->group('/api/v1/dashboard/admin', function ($group)use($admin){
 
         $admin->setName($name['data']);
         $admin->setLastName($lastName['data']);
-        $save = $admin->edit();
+        $save = $admin->adminUpdate();
 
         return $response
             ->withJson($save)

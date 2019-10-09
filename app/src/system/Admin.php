@@ -308,7 +308,7 @@ class Admin extends System
 
     }
 
-    public function edit(){
+    public function adminUpdate(){
 
     }
 
