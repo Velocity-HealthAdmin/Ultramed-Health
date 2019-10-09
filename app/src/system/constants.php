@@ -1,7 +1,7 @@
 <?php 
 
 	/*Security*/
-	define('SECRETE_KEY', 'test123');//to generate unique one thats long and random, unguesable 
+	define('SECRETE_KEY', 'supersecretkeyyoushouldnotcommittogithub');//to generate unique one thats long and random, unguesable
 	
 	/* Database Connection */
 	define('DB_USERNAME', 'root');

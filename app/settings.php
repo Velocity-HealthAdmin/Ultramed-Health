@@ -14,6 +14,10 @@ return [
                 'auto_reload' => true,
             ],
         ],
+        // jwt settings
+        "jwt" => [
+            'secret' => "supersecretkeyyoushouldnotcommittogithub"
+        ],
 
         // monolog settings
         'logger' => [

@@ -1,7 +1,7 @@
 <?php
 //Hpme Route
 $app->get('/', App\Action\HomeAction::class)
-    ->setName('homepage');
+    ->setName('USSD API - Ultra-Med');
 //System
 include_once dirname(__FILE__). '/../app/src/system/System.php';
 include_once dirname(__FILE__). '/../app/src/system/Admin.php';
@@ -20,6 +20,7 @@ $app->group('/api/v1/ussd/subscriptions', function ($group) use ($op, $app) {
 
 });
 
+//member routes
 $app->group('/api/v1/ussd/member', function ($group)use($op, $memb){
 
     $group->post('/login', function ($request, $response)use($op){
@@ -208,6 +209,7 @@ $app->group('/api/v1/ussd/member', function ($group)use($op, $memb){
     });
 });
 
+//admin routes
 $app->group('/api/v1/dashboard/admin', function ($group)use($admin){
 
     $group->post('/login', function ($request, $response)use($admin ){
@@ -334,5 +336,38 @@ $app->group('/api/v1/dashboard/admin', function ($group)use($admin){
             ->withJson($admins)
             ->withStatus($admins['statusCode']);
     });
+
+});
+
+// api key route
+$app->post('/auth/login', function ($request, $response, array $args)use($admin) {
+
+    $params = $request->getParsedBody();
+    $settings = $this->get('settings');
+
+    $admin->setEmail($params['email']);
+    $admin->setPassword($params['password']);
+    $admin->setSecret($settings['jwt']['secret']);
+
+    $auth = $admin->apiLogin();
+    return $response->withJson($auth)
+        ->withStatus($auth['statusCode']);
+
+});
+
+$app->post('/auth/user/create', function ($request, $response, array $args)use($admin) {
+
+    $params = $request->getParsedBody();
+    $admin->setEmail($params['email']);
+    $admin->setName($params['name']);
+    $admin->setLastName($params['surname']);
+    if ($params['password'] !== $params['confirmPassword']){
+        return $response->withJson(array('statusCode' => FORBIDEN, 'error' => array('type' => 'PARAMETER_ERROR', 'message' => 'Passwords do not match')))
+            ->withStatus(FORBIDEN);
+    }
+    $admin->setPassword($params['password']);
+    $reg = $admin->apiUserCreate();
+    return $response->withJson($reg)
+        ->withStatus($reg['statusCode']);
 
 });

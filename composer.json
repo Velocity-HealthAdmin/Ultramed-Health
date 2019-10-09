@@ -20,6 +20,9 @@
         "slim/slim": "^3.0",
         "slim/twig-view": "^2.0",
         "slim/flash": "^0.1.0",
-        "monolog/monolog": "^1.13"
+        "monolog/monolog": "^1.13",
+        "tuupola/slim-jwt-auth": "^3.4",
+        "tuupola/base62": "^2.0",
+        "tuupola/slim-basic-auth": "^3.2"
     }
 }

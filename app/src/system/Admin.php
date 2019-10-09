@@ -11,6 +11,26 @@ use \PHPMailer\PHPMailer\PHPMailer;
 use Firebase\JWT\JWT;
 class Admin extends System
 {
+
+    protected $secret;
+
+
+    /**
+     * @param mixed $secret
+     */
+    public function setSecret($secret)
+    {
+        $this->secret = $secret;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSecret()
+    {
+        return $this->secret;
+    }
+
     public function __construct()
     {
         return parent::__construct();
@@ -60,6 +80,29 @@ class Admin extends System
             return $data;
         }
 
+    }
+
+    public function apiLogin(){
+        try{
+            $query = "SELECT * FROM  `apiusers` WHERE email= :email";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute(array(':email' => $this->getEmail()));
+
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $hash = $row['password'];
+            $id = $row['id'];
+
+            if (password_verify($this->getPassword(), $hash)) {
+                $token = JWT::encode(['id' => $id, 'email' => $this->getEmail()], $this->getSecret(), "HS256");
+                return array('statusCode' => SUCCESS_RESPONSE, 'token' => $token);
+            }else{
+                return array('statusCode' => UNAUTHORISED, 'error' => ['type' => 'AUTHORIZATION_ERROR', 'message' => 'Invalid login Credentials']);
+            }
+
+        }catch (\Exception $e){
+            return array('statusCode' => INTERNAL_SERVER_ERROR, 'error' => ['type' => 'HANDLED_EXCEPTION', 'message' => $e->getMessage()]);
+        }
     }
 
     public function create(){
@@ -126,6 +169,9 @@ class Admin extends System
         }
     }
 
+    public function apiUserCreate(){
+
+    }
     public function membersAll(){
         try{
 
