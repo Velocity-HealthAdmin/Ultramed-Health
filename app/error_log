@@ -1,0 +1,102 @@
+[09-Oct-2019 08:56:13 America/New_York] Slim Application Error:
+Type: RuntimeException
+Message: Insecure use of middleware over HTTP denied by configuration.
+File: /home/ultramedhealth/ussd.ultramedhealth.com/vendor/tuupola/slim-jwt-auth/src/JwtAuthentication.php
+Line: 133
+Trace: #0 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/tuupola/callable-handler/src/DoublePassTrait.php(47): Tuupola\Middleware\JwtAuthentication->process(Object(Slim\Http\Request), Object(Tuupola\Middleware\CallableHandler))
+#1 [internal function]: Tuupola\Middleware\JwtAuthentication->__invoke(Object(Slim\Http\Request), Object(Slim\Http\Response), Object(Slim\App))
+#2 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/DeferredCallable.php(57): call_user_func_array(Object(Tuupola\Middleware\JwtAuthentication), Array)
+#3 [internal function]: Slim\DeferredCallable->__invoke(Object(Slim\Http\Request), Object(Slim\Http\Response), Object(Slim\App))
+#4 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/MiddlewareAwareTrait.php(70): call_user_func(Object(Slim\DeferredCallable), Object(Slim\Http\Request), Object(Slim\Http\Response), Object(Slim\App))
+#5 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/MiddlewareAwareTrait.php(117): Slim\App->Slim\{closure}(Object(Slim\Http\Request), Object(Slim\Http\Response))
+#6 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/App.php(392): Slim\App->callMiddlewareStack(Object(Slim\Http\Request), Object(Slim\Http\Response))
+#7 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/App.php(297): Slim\App->process(Object(Slim\Http\Request), Object(Slim\Http\Response))
+#8 /home/ultramedhealth/ussd.ultramedhealth.com/public/index.php(27): Slim\App->run()
+#9 {main}
+View in rendered output by enabling the "displayErrorDetails" setting.
+
+[09-Oct-2019 08:58:01 America/New_York] Slim Application Error:
+Type: RuntimeException
+Message: Insecure use of middleware over HTTP denied by configuration.
+File: /home/ultramedhealth/ussd.ultramedhealth.com/vendor/tuupola/slim-jwt-auth/src/JwtAuthentication.php
+Line: 133
+Trace: #0 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/tuupola/callable-handler/src/DoublePassTrait.php(47): Tuupola\Middleware\JwtAuthentication->process(Object(Slim\Http\Request), Object(Tuupola\Middleware\CallableHandler))
+#1 [internal function]: Tuupola\Middleware\JwtAuthentication->__invoke(Object(Slim\Http\Request), Object(Slim\Http\Response), Object(Slim\App))
+#2 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/DeferredCallable.php(57): call_user_func_array(Object(Tuupola\Middleware\JwtAuthentication), Array)
+#3 [internal function]: Slim\DeferredCallable->__invoke(Object(Slim\Http\Request), Object(Slim\Http\Response), Object(Slim\App))
+#4 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/MiddlewareAwareTrait.php(70): call_user_func(Object(Slim\DeferredCallable), Object(Slim\Http\Request), Object(Slim\Http\Response), Object(Slim\App))
+#5 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/MiddlewareAwareTrait.php(117): Slim\App->Slim\{closure}(Object(Slim\Http\Request), Object(Slim\Http\Response))
+#6 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/App.php(392): Slim\App->callMiddlewareStack(Object(Slim\Http\Request), Object(Slim\Http\Response))
+#7 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/App.php(297): Slim\App->process(Object(Slim\Http\Request), Object(Slim\Http\Response))
+#8 /home/ultramedhealth/ussd.ultramedhealth.com/public/index.php(27): Slim\App->run()
+#9 {main}
+View in rendered output by enabling the "displayErrorDetails" setting.
+
+[09-Oct-2019 09:00:34 America/New_York] Slim Application Error:
+Type: RuntimeException
+Message: Insecure use of middleware over HTTP denied by configuration.
+File: /home/ultramedhealth/ussd.ultramedhealth.com/vendor/tuupola/slim-jwt-auth/src/JwtAuthentication.php
+Line: 133
+Trace: #0 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/tuupola/callable-handler/src/DoublePassTrait.php(47): Tuupola\Middleware\JwtAuthentication->process(Object(Slim\Http\Request), Object(Tuupola\Middleware\CallableHandler))
+#1 [internal function]: Tuupola\Middleware\JwtAuthentication->__invoke(Object(Slim\Http\Request), Object(Slim\Http\Response), Object(Slim\App))
+#2 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/DeferredCallable.php(57): call_user_func_array(Object(Tuupola\Middleware\JwtAuthentication), Array)
+#3 [internal function]: Slim\DeferredCallable->__invoke(Object(Slim\Http\Request), Object(Slim\Http\Response), Object(Slim\App))
+#4 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/MiddlewareAwareTrait.php(70): call_user_func(Object(Slim\DeferredCallable), Object(Slim\Http\Request), Object(Slim\Http\Response), Object(Slim\App))
+#5 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/MiddlewareAwareTrait.php(117): Slim\App->Slim\{closure}(Object(Slim\Http\Request), Object(Slim\Http\Response))
+#6 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/App.php(392): Slim\App->callMiddlewareStack(Object(Slim\Http\Request), Object(Slim\Http\Response))
+#7 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/App.php(297): Slim\App->process(Object(Slim\Http\Request), Object(Slim\Http\Response))
+#8 /home/ultramedhealth/ussd.ultramedhealth.com/public/index.php(27): Slim\App->run()
+#9 {main}
+View in rendered output by enabling the "displayErrorDetails" setting.
+
+[09-Oct-2019 09:04:14 America/New_York] Slim Application Error:
+Type: RuntimeException
+Message: Insecure use of middleware over HTTP denied by configuration.
+File: /home/ultramedhealth/ussd.ultramedhealth.com/vendor/tuupola/slim-jwt-auth/src/JwtAuthentication.php
+Line: 133
+Trace: #0 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/tuupola/callable-handler/src/DoublePassTrait.php(47): Tuupola\Middleware\JwtAuthentication->process(Object(Slim\Http\Request), Object(Tuupola\Middleware\CallableHandler))
+#1 [internal function]: Tuupola\Middleware\JwtAuthentication->__invoke(Object(Slim\Http\Request), Object(Slim\Http\Response), Object(Slim\App))
+#2 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/DeferredCallable.php(57): call_user_func_array(Object(Tuupola\Middleware\JwtAuthentication), Array)
+#3 [internal function]: Slim\DeferredCallable->__invoke(Object(Slim\Http\Request), Object(Slim\Http\Response), Object(Slim\App))
+#4 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/MiddlewareAwareTrait.php(70): call_user_func(Object(Slim\DeferredCallable), Object(Slim\Http\Request), Object(Slim\Http\Response), Object(Slim\App))
+#5 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/MiddlewareAwareTrait.php(117): Slim\App->Slim\{closure}(Object(Slim\Http\Request), Object(Slim\Http\Response))
+#6 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/App.php(392): Slim\App->callMiddlewareStack(Object(Slim\Http\Request), Object(Slim\Http\Response))
+#7 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/App.php(297): Slim\App->process(Object(Slim\Http\Request), Object(Slim\Http\Response))
+#8 /home/ultramedhealth/ussd.ultramedhealth.com/public/index.php(27): Slim\App->run()
+#9 {main}
+View in rendered output by enabling the "displayErrorDetails" setting.
+
+[09-Oct-2019 09:04:24 America/New_York] Slim Application Error:
+Type: RuntimeException
+Message: Insecure use of middleware over HTTP denied by configuration.
+File: /home/ultramedhealth/ussd.ultramedhealth.com/vendor/tuupola/slim-jwt-auth/src/JwtAuthentication.php
+Line: 133
+Trace: #0 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/tuupola/callable-handler/src/DoublePassTrait.php(47): Tuupola\Middleware\JwtAuthentication->process(Object(Slim\Http\Request), Object(Tuupola\Middleware\CallableHandler))
+#1 [internal function]: Tuupola\Middleware\JwtAuthentication->__invoke(Object(Slim\Http\Request), Object(Slim\Http\Response), Object(Slim\App))
+#2 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/DeferredCallable.php(57): call_user_func_array(Object(Tuupola\Middleware\JwtAuthentication), Array)
+#3 [internal function]: Slim\DeferredCallable->__invoke(Object(Slim\Http\Request), Object(Slim\Http\Response), Object(Slim\App))
+#4 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/MiddlewareAwareTrait.php(70): call_user_func(Object(Slim\DeferredCallable), Object(Slim\Http\Request), Object(Slim\Http\Response), Object(Slim\App))
+#5 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/MiddlewareAwareTrait.php(117): Slim\App->Slim\{closure}(Object(Slim\Http\Request), Object(Slim\Http\Response))
+#6 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/App.php(392): Slim\App->callMiddlewareStack(Object(Slim\Http\Request), Object(Slim\Http\Response))
+#7 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/App.php(297): Slim\App->process(Object(Slim\Http\Request), Object(Slim\Http\Response))
+#8 /home/ultramedhealth/ussd.ultramedhealth.com/public/index.php(27): Slim\App->run()
+#9 {main}
+View in rendered output by enabling the "displayErrorDetails" setting.
+
+[09-Oct-2019 09:09:58 America/New_York] Slim Application Error:
+Type: RuntimeException
+Message: Insecure use of middleware over HTTP denied by configuration.
+File: /home/ultramedhealth/ussd.ultramedhealth.com/vendor/tuupola/slim-jwt-auth/src/JwtAuthentication.php
+Line: 133
+Trace: #0 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/tuupola/callable-handler/src/DoublePassTrait.php(47): Tuupola\Middleware\JwtAuthentication->process(Object(Slim\Http\Request), Object(Tuupola\Middleware\CallableHandler))
+#1 [internal function]: Tuupola\Middleware\JwtAuthentication->__invoke(Object(Slim\Http\Request), Object(Slim\Http\Response), Object(Slim\App))
+#2 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/DeferredCallable.php(57): call_user_func_array(Object(Tuupola\Middleware\JwtAuthentication), Array)
+#3 [internal function]: Slim\DeferredCallable->__invoke(Object(Slim\Http\Request), Object(Slim\Http\Response), Object(Slim\App))
+#4 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/MiddlewareAwareTrait.php(70): call_user_func(Object(Slim\DeferredCallable), Object(Slim\Http\Request), Object(Slim\Http\Response), Object(Slim\App))
+#5 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/MiddlewareAwareTrait.php(117): Slim\App->Slim\{closure}(Object(Slim\Http\Request), Object(Slim\Http\Response))
+#6 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/App.php(392): Slim\App->callMiddlewareStack(Object(Slim\Http\Request), Object(Slim\Http\Response))
+#7 /home/ultramedhealth/ussd.ultramedhealth.com/vendor/slim/slim/Slim/App.php(297): Slim\App->process(Object(Slim\Http\Request), Object(Slim\Http\Response))
+#8 /home/ultramedhealth/ussd.ultramedhealth.com/public/index.php(27): Slim\App->run()
+#9 {main}
+View in rendered output by enabling the "displayErrorDetails" setting.
+

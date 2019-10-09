@@ -339,7 +339,7 @@ $app->group('/api/v1/dashboard/admin', function ($group)use($admin){
 
 });
 
-// api key route
+// api authentication get token login
 $app->post('/auth/login', function ($request, $response, array $args)use($admin) {
 
     $params = $request->getParsedBody();
@@ -355,6 +355,7 @@ $app->post('/auth/login', function ($request, $response, array $args)use($admin)
 
 });
 
+//add api user account
 $app->post('/auth/user/create', function ($request, $response, array $args)use($admin) {
 
     $params = $request->getParsedBody();
@@ -370,4 +371,8 @@ $app->post('/auth/user/create', function ($request, $response, array $args)use($
     return $response->withJson($reg)
         ->withStatus($reg['statusCode']);
 
+});
+
+$app->get('/api/random/string/{len}', function($request, $response)use($op){
+    return $response->withJson(array('key' => $op->createString($request->getAttribute('len'))));
 });
