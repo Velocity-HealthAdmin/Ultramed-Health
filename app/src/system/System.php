@@ -533,7 +533,7 @@ class System
         $this->mail = new PHPMailer();
         $this->mail->SMTPAuth = true;
         $this->mail->Username = "admin@ultramedhealth.com";
-        $this->mail->Password = "oWvQUg1E_VP%";
+        $this->mail->Password = emailPD;
         $this->mail->SMTPSecure = "TLS"; //ssl
         $this->mail->Port = 587; //465
 

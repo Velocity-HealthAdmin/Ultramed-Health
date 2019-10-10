@@ -9,9 +9,10 @@
 	define('DB_HOST', 'localhost');
 	define('DB_NAME', 'ultramed');
 
-	define('DB_PWD', '&HTD3L_!komt');
+	define('DB_PWD', 'online one correct one');
 	define('DB_LNAME', 'ultramedhealth_members');
 	define('DB_USERL', 'ultramedhealth_dashboard');
+	define('emailPD', 'online one has correct');
 	/*Data Type*/
 	define('BOOLEAN', 	'1');
 	define('INTEGER', 	'2');
