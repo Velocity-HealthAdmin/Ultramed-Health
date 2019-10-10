@@ -457,13 +457,17 @@ class Admin extends System
         try{
             $pwd = $this->getPassword();
             $payload = JWT::decode($this->getTkn(), SECRETE_KEY, ['HS256']);
-
         }catch (\Exception $e){
 
         }
     }
 
     public function userAccountEmail(){
+
+        $this->mail->addAddress($this->getEmail());
+        $this->mail->setFrom("no-reply@ultramedhealth.com");
+        $this->mail->Subject = "Account creation confirmation";
+        $this->mail->isHTML(true);
 
         $body = "";
 
@@ -478,6 +482,10 @@ class Admin extends System
 
 
     public function accountCreateMail(){
+        $this->mail->addAddress($this->getEmail());
+        $this->mail->setFrom("admin@ultramedhealth.com");
+        $this->mail->Subject = "Dashboard Account Creation update";
+        $this->mail->isHTML(true);
         $body = '
                     <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                     <html>
