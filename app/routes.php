@@ -236,6 +236,14 @@ $app->group('/api/v1/dashboard/admin', function ($group)use($admin){
             ->withStatus($login['statusCode']);
     });
 
+    $group->patch('/update/password', function ($request, $response)use($admin){
+        $params = $request->getParsedBody();
+
+        if ($params['password'] !== $params['confirmPassword']){
+
+        }
+    });
+
     $group->put('/create', function($request, $response)use($admin){
         $params = $request->getParsedBody();
 

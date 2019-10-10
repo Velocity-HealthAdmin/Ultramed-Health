@@ -11,6 +11,8 @@ include_once dirname(__FILE__) . '/MembershipNumber.php';
 include_once dirname(__FILE__) . '/vendor/autoload.php';
 
 use Firebase\JWT\JWT;
+use \PHPMailer\PHPMailer\PHPMailer;
+
 class System
 {
     protected $pdo;
@@ -45,7 +47,7 @@ class System
     protected $end;
     protected $bill;
     protected $dept;
-
+    protected $mail;
     /**
      * @return mixed
      */
@@ -528,6 +530,13 @@ class System
 
     public function __construct()
     {
+        $this->mail = new PHPMailer();
+        $this->mail->SMTPAuth = true;
+        $this->mail->Username = "admin@ultramedhealth.com";
+        $this->mail->Password = "oWvQUg1E_VP%";
+        $this->mail->SMTPSecure = "TLS"; //ssl
+        $this->mail->Port = 587; //465
+
         $db = new Database();
         $this->pdo = $db->PDO();
         $this->con = $db->mysqli();
