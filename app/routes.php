@@ -379,6 +379,7 @@ $app->post('/auth/user/create', function ($request, $response, array $args)use($
 
 });
 
+//create random string key
 $app->get('/api/random/string/{len}', function($request, $response)use($op){
     return $response->withJson(array('key' => $op->createString($request->getAttribute('len'))));
 });
