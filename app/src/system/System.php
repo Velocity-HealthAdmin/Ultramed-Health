@@ -806,17 +806,15 @@ class System
                     $sql = "INSERT INTO `members`(`id`, `name`, `surname`, `id_number`, `membership_no`, `dob`, `gender`, `msisdn`, `address`, `town`, `created`, `updated`) VALUES ('','$name','$sname','$ID','$mib','$dob','$sex','$u','$address', '$town',now(),'')";
                     $insert = mysqli_query($this->con, $sql);
                     if ($insert){
-
-                        $member->update($mb['province'], $mb['id']);
                         $id = mysqli_insert_id($this->con);
+                        $this->registrationInvoice($id);
+                        $member->update($mb['province'], $mb['id']);
 
-                        $msql = "INSERT INTO `member_details`(`id`, `member_id`, `package`, `subscription_status`) VALUES ('','$id','$package', '0')";
+                        $msql = "INSERT INTO `member_details`(`id`, `member_id`, `package`, `subscription_status`) VALUES ('','$id','$package', '0');";
+
+                        $msql .= "INSERT INTO `member_login`(`id`, `member_id`, `msisdn`, `pin`, `password`, `status`, `created`, `updated`) VALUES ('','$id','$u','$pin','','0',now(),'')";
                         $details = mysqli_query($this->con, $msql);
-
-
-                        $lsql = "INSERT INTO `member_login`(`id`, `member_id`, `msisdn`, `pin`, `password`, `status`, `created`, `updated`) VALUES ('','$id','$u','$pin','','0',now(),'')";
-                        $login = mysqli_query($this->con, $lsql);
-                        if ($login && $details){
+                        if ($details){
                             $data = array('success' => true, 'statusCode' => CREATED, 'message'=> 'Account created successfully');
                             return $data;
                         }else{
@@ -1202,6 +1200,14 @@ class System
         }
     }
 
+    public function registrationInvoice($id){
+        $this->setId($id);
+        $memberTotal  = $this->memberInvoice($this->getId());
+        $dependantsTotal = $this->dependantInvoice($this->getId());
+        $total = $memberTotal + $dependantsTotal;
+
+        $this->creditSubscriptionInvoice($this->getId(), $total);
+    }
     public function invoice(){
 
         $msql = "SELECT * FROM `members`";

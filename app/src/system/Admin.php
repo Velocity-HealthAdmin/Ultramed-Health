@@ -333,6 +333,27 @@ class Admin extends System
         }
     }
 
+    public function blacklist($id){
+        $sql = "UPDATE `member_login` SET `status`='2', `updated` = now() WHERE `member_id` = '$id'";
+        $qry = mysqli_query($this->con, $sql);
+
+        if ($qry){
+            $data = array(
+                'success' => true,
+                'statusCode' => SUCCESS_RESPONSE,
+                'message' => 'member successfully suspended'
+            );
+            return $data;
+        }else{
+            $data =  array(
+                'success' => false,
+                'statusCode' => INTERNAL_SERVER_ERROR,
+                'error' => array('type' => 'INTERNAL_SERVER_ERROR', 'message' => 'Suspending account failed: ' .mysqli_error($this->con) )
+            );
+            return $data;
+        }
+    }
+
     public function removeMember($id){
         $dsql = "DELETE FROM `members` WHERE `id` = '$id'";
         $qry = mysqli_query($this->con, $dsql);
@@ -479,7 +500,6 @@ class Admin extends System
             return false;
         }
     }
-
 
     public function accountCreateMail(){
         $this->mail->addAddress($this->getEmail());

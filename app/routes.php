@@ -349,6 +349,23 @@ $app->group('/api/v1/dashboard/admin', function ($group)use($admin){
         $act = $request->getAttribute('action');
         $mID = $request->getAttribute('member');
 
+        if ($act == 'suspend'){
+            $suspend = $admin->memberSuspend($mID);
+            return $response->withJson($suspend)
+                ->withStatus($suspend['statusCode']);
+        }
+
+        if ($act == 'blacklist'){
+            $blacklist = $admin->blacklist($mID);
+            return $response->withJson($blacklist)
+                ->withStatus($blacklist['statusCode']);
+        }
+
+        if ($act == 'remove'){
+            $removeMember = $admin->removeMember($mID);
+            return $response->withJson($removeMember)
+                ->withStatus($removeMember['statusCode']);
+        }
     });
 
 });
